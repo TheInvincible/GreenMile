@@ -1,0 +1,38 @@
+span{
+    margin-top: 10px;
+}
+
+.badge{
+    padding: 20px;
+}
+
+.layout-nav {
+    background-color: #0022;
+}
+
+.upper-nav-logo {
+    width: 200px;
+    padding: 10px;
+    margin-left: 50px;
+}
+
+.lowr {
+    background-color: white;
+    text-align: right;
+    color: black;
+}
+
+.svc{
+    display: block;
+}
+
+li {
+    float: right;
+}
+
+.edit{
+    /* background-color: rgb(136, 132, 132);    */
+}
+.edit input{
+    width: 50%;
+}

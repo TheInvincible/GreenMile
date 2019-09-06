@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+{% block content %}
+	<div>		 
+		<ul class="lowr">
+			<li> <a class="badge" href="#">Login</a></li>
+			<li><a class="badge" href="#">Register</a></li>
+			<li><a class="badge" href="#">Home</a></li>
+			
+		</ul>		
+	</div>
+	{% for updates in updates %}
+		<article>
+			<div>
+				<div>
+					<a href="" class="">{{ update.author.username }}</a>
+				</div>
+				<h2><a href="{{ url_for('update', update_id=update.id) }}" class="">{{ update_title }}</a></h2>
+				<p>{{ update.content }}</p>
+			</div>
+		</article>
+
+		<div class="nav-wrapper">
+				<div class="container">
+					<h3>Dashboard</h3>
+					<p class=" ">
+						<ul id="nav-mobile" class="sidenav">
+							<li>Arrivals</li>
+							<li>Loaded</li>
+							<li>Still Pending</li>
+						</ul>
+					</p>
+				</div>
+		</div>
+
+	{% endfor %}
+
+	<!-- <h1>Green-Mile Solutions</h1> -->
+
+	<!-- <img src="{{ url_for('static', filename='img/connect.jpg') }}"> -->
+
+	<!-- <img src="../static/img/connect.jpg" alt=""> -->
+
+
+	<div class="nav-wrapper">
+			<form class="edit">
+			  <div class="input-field">
+				<input id="search" type="search" required>
+				<label class="label-icon" for="search" style="font-size: 26px;">Enter Your Tracking Code Here<i class="material-icons">search</i></label>
+			  </div>
+			</form>
+	</div>
+		
+		<div class="card horizontal">
+		  
+		  <div class="card-image">
+			<img src="{{ url_for('static', filename='img/connect.jpg') }}">
+			
+		  </div>
+		  <div class="card-stacked">
+			<div class="card-content">
+				<h4>Welcome to Green Mile</h4>
+			  <p> </p>
+			</div>
+			<div class="card-action">
+			  <a href="#">Next</a>
+			</div>
+		  </div>
+		</div>
+	
+
+
+{% endblock content %}

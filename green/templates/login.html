@@ -1,0 +1,54 @@
+{% extends "layout.html" %} 
+    {% block content %}
+
+        <div class="container">
+          <h3>Login Here</h3>
+              <form method="POST" action="">
+                {{ form.hidden_tag() }}
+                <fieldset>                    
+                    <div class="input-field">
+                            {{ form.username.label(class="materialize-textarea validate")}}
+                            {% if form.username.errors %}
+                                <div class="alert-danger">
+                                  {% for error in form.username.errors %}
+                                      <span>{{ error }}</span>
+                                  {% endfor %}
+                              </div>
+                            {% else %}
+                                {{ form.username(class="materialize-textarea validate") }}
+                            {% endif %}
+                    </div>
+
+                      <div class="input-field">
+                            {{ form.password.label(class="materialize-textarea validate") }}
+
+                            {% if form.password.errors %}
+                              {{ form.password(class= "msg-error") }}
+                                <div class="alert-danger">
+                                    {% for error in form.password.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.password(class="materialize-textarea validate") }}
+                            {% endif %}
+                        </div>
+                        <input type='checkbox'>
+                            {{ form.remember(class="form-check-input")}}
+                            {{ form.remember.label(class="")}}
+                            
+                        </input>
+                        <div class="badge">
+                            {{ form.submit(class= "btn waves-effect waves-light") }}
+                        </div>
+                </fieldset>
+            
+                    <small class="badge">
+                      Forgotten your password?
+                      <a href="#">  Reset Password Here</a>
+                    </small>
+           
+            </form>
+        </div>
+
+    {% endblock content %}
