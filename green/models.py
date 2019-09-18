@@ -20,15 +20,20 @@ def create_app(config_name):
     return app
 
 
-class User(db.Model):
+class User(UserMixin, db.Model):
+
+	__tablename__ = 'user'
+
 	id = db.Column(db.Integer, primary_key=True)
 	username = db.Column(db.String(20), unique=True, nullable=False)
 	email = db.Column(db.String(120), unique=True, nullable=False)
-	image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
+	image_file = db.Column(db.String(20), nullable=True, default='default.jpg')
 	password = db.Column(db.String(60), nullable=False)
 	company_id = db.Column('Company', db.Integer, db.ForeignKey('company.id'))
 	role_id = db.Column('Role', db.Integer, db.ForeignKey('role.id'))
 	is_admin = db.Column(db.Boolean, default=False)
+
+	# def __init__(self, username, email, image_file, password, company_id, is_admin):
 
 	@property
 	def password(self):
@@ -41,17 +46,21 @@ class User(db.Model):
 	def verify_password(self, password):
 		return check_password_hash(self.password_hash, password)
 
+	def is_accessible(self):
+		return login.current_user.is_authenticated()
+
 	def __repr__(self):
-		return f"User('{self.username}', '{self.image_file}'"
-
-
+		return '<User: {}>'.format(self.image_file)
 
 
 class Role(db.Model):
+
+	__tablename__ = 'role'
+
 	id = db.Column(db.Integer, primary_key=True)
 	name = db.Column(db.String(20), unique=True, nullable=False)
 	description = db.Column(db.String(200))
-	user = db.relationship('User', backref='role', lazy=True)
+	user = db.relationship('User', backref='role', lazy='dynamic')
 
 	def __repr__(self):
 		return '<Roles: {}>'.format(self.name)
@@ -59,10 +68,12 @@ class Role(db.Model):
 
 class Company(db.Model):
 
+	__tablename__ = 'company'
+
 	id = db.Column(db.Integer, primary_key=True)
 	name = db.Column(db.String(20), unique=True, nullable=False)
 	description = db.Column(db.String(200))
-	user = db.relationship('User', backref='company', lazy=True)
+	user = db.relationship('User', backref='company', lazy='dynamic')
 
 	def __repr__(self):
 		return '<Company: {}>'.format(self.name)

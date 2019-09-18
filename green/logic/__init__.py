@@ -2,10 +2,10 @@ def create_app(config_name):
     
     from green import models
 
-    from .admin import admin as admin_blueprint
-    app.register_blueprint(admin_blueprint, url_prefix='/admin')
+    from .admins import admins as admins_blueprint
+    app.register_blueprint(admins_blueprint, url_prefix='/admin')
 
-    from .authent import auth as auth_blueprint
+    from .authent import authent as authent_blueprint
     app.register_blueprint(authent_blueprint)
 
     from .home import home as home_blueprint

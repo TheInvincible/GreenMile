@@ -5,6 +5,7 @@ from . import home as viola
 
 
 @viola.route('/')
+@viola.route('/home')
 def home():
 	return render_template('home/home.html', title='Home')
 
