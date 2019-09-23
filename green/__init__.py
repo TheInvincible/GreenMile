@@ -7,6 +7,8 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 import psycopg2
 from psycopg2 import Error
+from flask_admin import Admin, BaseView
+from flask_admin.contrib.sqla import ModelView
 
 
 SECRET_KEY = 'ee74cfafc19495358de8ba756ce6746a'
@@ -21,6 +23,8 @@ def create_app(config_name):
 	app = Flask(__name__, instance_relative_config=True)  # Setting the name of the current flask module to an instance of the Flask class (Instantiate a flask application into a variable(app variable in this case))
 	app.config.from_pyfile('config.py')
 
+	admin = Admin(app)
+
 	Bootstrap(app)
 	db.init_app(app)
 
@@ -31,7 +35,9 @@ def create_app(config_name):
 	login_manager.login_view = "authent.login"
 	migrate = Migrate(app, db)
 
-	# from green.models import User
+	from green.models import User
+
+	admin.add_view(ModelView(User, db.session))	
 
 	from green import models
 	from green.logic.admins import admins as admins_blueprint
