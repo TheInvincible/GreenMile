@@ -1,6 +1,6 @@
 
 class Config(object):
-	pass	
+	FLASK_ADMIN_SWATCH = 'darkly'
 
 class DevelopmentConfig(Config):
 	DEBUG = True
